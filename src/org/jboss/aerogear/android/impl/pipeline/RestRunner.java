@@ -215,13 +215,13 @@ public class RestRunner<T> implements PipeHandler<T> {
         JsonElement httpJsonResult = parser.parse(responseAsString);
         httpJsonResult = getResultElement(httpJsonResult, dataRoot);
         if (httpJsonResult.isJsonArray()) {
-            T[] resultArray = responseParser.handleArrayResponse(httpJsonResult.getAsString(), arrayKlass);
+            T[] resultArray = responseParser.handleArrayResponse(httpJsonResult.toString(), arrayKlass);
             result = Arrays.asList(resultArray);
             if (pageConfig != null) {
                 result = computePagedList(result, httpResponse, filter.getWhere(), requestingPipe);
             }
         } else {
-            T resultObject = responseParser.handleResponse(httpJsonResult.getAsString(), klass);
+            T resultObject = responseParser.handleResponse(httpJsonResult.toString(), klass);
             List<T> resultList = new ArrayList<T>(1);
             resultList.add(resultObject);
             result = resultList;

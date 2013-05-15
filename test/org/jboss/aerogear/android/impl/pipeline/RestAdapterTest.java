@@ -17,7 +17,6 @@
 package org.jboss.aerogear.android.impl.pipeline;
 
 import org.jboss.aerogear.android.impl.pipeline.paging.WrappingPagedList;
-import android.graphics.Point;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.InstanceCreator;
@@ -30,6 +29,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
+import java.io.Serializable;
 import junit.framework.Assert;
 import org.jboss.aerogear.android.http.HeaderAndBody;
 import org.jboss.aerogear.android.http.HttpProvider;
@@ -124,14 +124,16 @@ public class RestAdapterTest {
         DefaultPipeFactory factory = new DefaultPipeFactory();
         PipeConfig pc = new PipeConfig(url, ListClassId.class);
 
-        pc.setGsonBuilder(builder);
+        GsonResponseParser<ListClassId> responseParser = new GsonResponseParser<ListClassId>(builder);
+        pc.setResponseParser(responseParser);
+        
         Pipe<ListClassId> restPipe = factory.createPipe(ListClassId.class, pc);
         Object restRunner = UnitTestUtils.getPrivateField(restPipe, "restRunner");
-        Field gsonField = restRunner.getClass().getDeclaredField("gson");
+        Field gsonField = restRunner.getClass().getDeclaredField("responseParser");
         gsonField.setAccessible(true);
-        Gson gson = (Gson) gsonField.get(restRunner);
+        GsonResponseParser gson = (GsonResponseParser) gsonField.get(restRunner);
 
-        gson.toJson(new ListClassId());
+        assertEquals(responseParser, gson);
 
     }
 
@@ -274,7 +276,7 @@ public class RestAdapterTest {
         };
 
         PipeConfig config = new PipeConfig(url, ListClassId.class);
-        config.setGsonBuilder(builder);
+        config.setResponseParser(new GsonResponseParser(builder));
 
         Pipe<ListClassId> restPipe = new RestAdapter<ListClassId>(ListClassId.class, url, config);
         Object restRunner = UnitTestUtils.getPrivateField(restPipe, "restRunner");
@@ -303,7 +305,8 @@ public class RestAdapterTest {
             }
         });
 
-        latch.await(2, TimeUnit.SECONDS);
+        latch.await(20, TimeUnit.SECONDS);
+
         assertEquals(SERIALIZED_POINTS, request.toString());
         assertEquals(listClass.points, returnedPoints);
     }
@@ -638,5 +641,47 @@ public class RestAdapterTest {
             return new Point(json.getAsJsonObject().getAsJsonPrimitive("x").getAsInt(),
                     json.getAsJsonObject().getAsJsonPrimitive("y").getAsInt());
         }
+    }
+    
+    public static final class Point implements Serializable {
+        
+        public int x, y;
+
+        public Point() {
+        }
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 5;
+            hash = 19 * hash + this.x;
+            hash = 19 * hash + this.y;
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final Point other = (Point) obj;
+            if (this.x != other.x) {
+                return false;
+            }
+            if (this.y != other.y) {
+                return false;
+            }
+            return true;
+        }
+
+        
+        
     }
 }
