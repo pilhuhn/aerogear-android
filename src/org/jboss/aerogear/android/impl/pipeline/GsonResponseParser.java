@@ -26,6 +26,7 @@ public class GsonResponseParser<T> implements ResponseParser<T> {
 
     public GsonResponseParser() {
         this.gson = new Gson();
+        this.gsonBuilder = new GsonBuilder();
     }
 
     public GsonResponseParser(Gson gson) {

@@ -29,6 +29,7 @@ public class GsonRequestBuilder<T> implements RequestBuilder<T> {
 
     public GsonRequestBuilder() {
         this.gson = new Gson();
+        this.gsonBuilder = new GsonBuilder();
     }
 
     public GsonRequestBuilder(Gson gson) {
