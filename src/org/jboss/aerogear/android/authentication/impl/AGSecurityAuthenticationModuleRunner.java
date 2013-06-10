@@ -57,9 +57,9 @@ class AGSecurityAuthenticationModuleRunner {
         this.loginURL = UrlUtils.appendToBaseURL(baseURL, loginEndpoint);
         this.logoutURL = UrlUtils.appendToBaseURL(baseURL, logoutEndpoint);
         this.enrollURL = UrlUtils.appendToBaseURL(baseURL, enrollEndpoint);
-        
+
         this.timeout = config.getTimeout();
-        
+
     }
 
     public HeaderAndBody onEnroll(final Map<String, String> userData) {
@@ -94,8 +94,6 @@ class AGSecurityAuthenticationModuleRunner {
     public String getEnrollEndpoint() {
         return enrollEndpoint;
     }
-
-   
 
     private String buildLoginData(String username, String password) {
         JsonObject response = new JsonObject();

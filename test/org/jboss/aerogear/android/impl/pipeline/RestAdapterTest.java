@@ -114,7 +114,7 @@ public class RestAdapterTest {
 
         GsonResponseParser<ListClassId> responseParser = new GsonResponseParser<ListClassId>(builder);
         pc.setResponseParser(responseParser);
-        
+
         Pipe<ListClassId> restPipe = factory.createPipe(ListClassId.class, pc);
         Object restRunner = UnitTestUtils.getPrivateField(restPipe, "restRunner");
         Field gsonField = restRunner.getClass().getDeclaredField("responseParser");
@@ -305,8 +305,6 @@ public class RestAdapterTest {
         assertEquals(listClass.points, returnedPoints);
     }
 
-
-    
     @Test
     public void runReadWithFilterUsingUri() throws Exception {
 
@@ -640,9 +638,9 @@ public class RestAdapterTest {
                     json.getAsJsonObject().getAsJsonPrimitive("y").getAsInt());
         }
     }
-    
+
     public static final class Point implements Serializable {
-        
+
         public int x, y;
 
         public Point() {
@@ -679,7 +677,5 @@ public class RestAdapterTest {
             return true;
         }
 
-        
-        
     }
 }

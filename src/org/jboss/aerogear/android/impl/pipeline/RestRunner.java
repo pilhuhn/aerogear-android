@@ -99,7 +99,7 @@ public class RestRunner<T> implements PipeHandler<T> {
         this.baseURL = baseURL;
         this.timeout = config.getTimeout();
 
-        if (config.getRequestBuilder()!= null) {
+        if (config.getRequestBuilder() != null) {
             this.requestBuilder = config.getRequestBuilder();
         } else {
             this.requestBuilder = new GsonRequestBuilder<T>();
@@ -118,11 +118,11 @@ public class RestRunner<T> implements PipeHandler<T> {
         }
 
         if (config.getResponseParser() != null) {
-            this.responseParser = config.getResponseParser(); 
+            this.responseParser = config.getResponseParser();
         } else {
             this.responseParser = new GsonResponseParser<T>();
         }
-        
+
         if (config.getPageConfig() != null) {
             this.pageConfig = config.getPageConfig();
 
@@ -140,7 +140,6 @@ public class RestRunner<T> implements PipeHandler<T> {
                 }
             }
 
-            
         } else {
             this.pageConfig = null;
             this.parameterProvider = new DefaultParameterProvider();
@@ -167,7 +166,7 @@ public class RestRunner<T> implements PipeHandler<T> {
 
         byte[] body = requestBuilder.getBody(data);
         final HttpProvider httpProvider = getHttpProvider();
-        
+
         HeaderAndBody result;
         if (id == null || id.length() == 0) {
             result = httpProvider.post(body);
