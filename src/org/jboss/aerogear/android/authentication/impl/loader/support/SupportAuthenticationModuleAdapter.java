@@ -16,20 +16,10 @@
  */
 package org.jboss.aerogear.android.authentication.impl.loader.support;
 
-import android.content.Context;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.util.Log;
-import com.google.common.base.Objects;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.authentication.AuthenticationModule;
 import org.jboss.aerogear.android.authentication.AuthorizationFields;
@@ -38,6 +28,18 @@ import org.jboss.aerogear.android.authentication.impl.loader.LoaderAuthenticatio
 import org.jboss.aerogear.android.http.HeaderAndBody;
 import org.jboss.aerogear.android.pipeline.support.AbstractFragmentActivityCallback;
 import org.jboss.aerogear.android.pipeline.support.AbstractSupportFragmentCallback;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.util.Log;
+
+import com.google.common.base.Objects;
 
 /**
  * This class manages the relationship between Android's Loader framework and

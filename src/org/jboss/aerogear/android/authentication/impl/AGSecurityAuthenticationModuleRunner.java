@@ -16,11 +16,9 @@
  */
 package org.jboss.aerogear.android.authentication.impl;
 
-import android.util.Log;
-import com.google.gson.JsonObject;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+
 import org.jboss.aerogear.android.Provider;
 import org.jboss.aerogear.android.authentication.AuthenticationConfig;
 import org.jboss.aerogear.android.http.HeaderAndBody;
@@ -28,6 +26,8 @@ import org.jboss.aerogear.android.http.HttpProvider;
 import org.jboss.aerogear.android.impl.core.HttpProviderFactory;
 import org.jboss.aerogear.android.impl.util.UrlUtils;
 import org.json.JSONObject;
+
+import com.google.gson.JsonObject;
 
 class AGSecurityAuthenticationModuleRunner {
 

@@ -16,20 +16,9 @@
  */
 package org.jboss.aerogear.android.impl.pipeline;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.LoaderManager;
-import android.content.Context;
-import android.content.Loader;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import com.google.common.base.Objects;
-import com.google.common.collect.Multimap;
-import com.google.gson.Gson;
 import java.net.URL;
 import java.util.List;
+
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.ReadFilter;
 import org.jboss.aerogear.android.impl.pipeline.loader.AbstractPipeLoader;
@@ -42,6 +31,20 @@ import org.jboss.aerogear.android.pipeline.LoaderPipe;
 import org.jboss.aerogear.android.pipeline.Pipe;
 import org.jboss.aerogear.android.pipeline.PipeHandler;
 import org.jboss.aerogear.android.pipeline.PipeType;
+
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.LoaderManager;
+import android.content.Context;
+import android.content.Loader;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+
+import com.google.common.base.Objects;
+import com.google.common.collect.Multimap;
+import com.google.gson.Gson;
 
 /**
  * This class wraps a Pipe in an asynchronous Loader.

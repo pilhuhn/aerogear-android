@@ -16,14 +16,16 @@
  */
 package org.jboss.aerogear.android.authentication.impl;
 
-import android.util.Log;
+import java.net.URL;
+import java.util.Map;
+
 import org.jboss.aerogear.android.Callback;
 import org.jboss.aerogear.android.authentication.AbstractAuthenticationModule;
 import org.jboss.aerogear.android.authentication.AuthenticationConfig;
 import org.jboss.aerogear.android.authentication.AuthorizationFields;
 import org.jboss.aerogear.android.http.HeaderAndBody;
-import java.net.URL;
-import java.util.Map;
+
+import android.util.Log;
 
 /**
  * A module for authenticating with restful AG services.
