@@ -47,7 +47,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -112,7 +111,7 @@ public class RestAdapterTest {
         DefaultPipeFactory factory = new DefaultPipeFactory();
         PipeConfig pc = new PipeConfig(url, ListClassId.class);
 
-        GsonResponseParser<ListClassId> responseParser = new GsonResponseParser<ListClassId>(builder);
+        GsonResponseParser<ListClassId> responseParser = new GsonResponseParser<ListClassId>(builder.create());
         pc.setResponseParser(responseParser);
 
         Pipe<ListClassId> restPipe = factory.createPipe(ListClassId.class, pc);
@@ -133,7 +132,7 @@ public class RestAdapterTest {
         final HttpStubProvider provider = new HttpStubProvider(url, new HeaderAndBody(SERIALIZED_POINTS.getBytes(utf_16), new HashMap<String, Object>()));
 
         PipeConfig config = new PipeConfig(url, ListClassId.class);
-        config.setGsonBuilder(builder);
+        config.setRequestBuilder(new GsonRequestBuilder(builder.create()));
         config.setEncoding(utf_16);
         RestAdapter<ListClassId> restPipe = new RestAdapter<ListClassId>(ListClassId.class, url, config);
         Object restRunner = UnitTestUtils.getPrivateField(restPipe, "restRunner");
@@ -157,7 +156,7 @@ public class RestAdapterTest {
         Pipeline pipeline = new Pipeline(url);
         PipeConfig config = new PipeConfig(url, ListClassId.class);
         config.setEncoding(utf_16);
-        config.setGsonBuilder(builder);
+        config.setRequestBuilder(new GsonRequestBuilder(builder.create()));
 
         RestAdapter<ListClassId> restPipe = (RestAdapter<ListClassId>) pipeline
                 .pipe(ListClassId.class, config);
@@ -173,7 +172,7 @@ public class RestAdapterTest {
         final HttpStubProvider provider = new HttpStubProvider(url, response);
 
         PipeConfig config = new PipeConfig(url, ListClassId.class);
-        config.setGsonBuilder(builder);
+        config.setRequestBuilder(new GsonRequestBuilder(builder.create()));
 
         RestAdapter<ListClassId> restPipe = new RestAdapter<ListClassId>(ListClassId.class, url, config);
         Object restRunner = UnitTestUtils.getPrivateField(restPipe, "restRunner");
@@ -197,7 +196,7 @@ public class RestAdapterTest {
         final HttpStubProvider provider = new HttpStubProvider(url, response);
 
         PipeConfig config = new PipeConfig(url, ListClassId.class);
-        config.setGsonBuilder(builder);
+        config.setRequestBuilder(new GsonRequestBuilder(builder.create()));
         config.setDataRoot("result.points");
 
         RestAdapter<ListClassId> restPipe = new RestAdapter<ListClassId>(ListClassId.class, url, config);
@@ -223,7 +222,7 @@ public class RestAdapterTest {
         final HttpStubProvider provider = new HttpStubProvider(url, response);
 
         PipeConfig config = new PipeConfig(url, ListClassId.class);
-        config.setGsonBuilder(builder);
+        config.setRequestBuilder(new GsonRequestBuilder(builder.create()));
         config.setDataRoot("");
 
         RestAdapter<Point> restPipe = new RestAdapter<Point>(Point.class, url, config);
@@ -270,7 +269,7 @@ public class RestAdapterTest {
         };
 
         PipeConfig config = new PipeConfig(url, ListClassId.class);
-        config.setResponseParser(new GsonResponseParser(builder));
+        config.setResponseParser(new GsonResponseParser(builder.create()));
 
         Pipe<ListClassId> restPipe = new RestAdapter<ListClassId>(ListClassId.class, url, config);
         Object restRunner = UnitTestUtils.getPrivateField(restPipe, "restRunner");
@@ -398,7 +397,7 @@ public class RestAdapterTest {
         GsonBuilder builder = new GsonBuilder().registerTypeAdapter(Point.class, new RestAdapterTest.PointTypeAdapter());
 
         PipeConfig pipeConfig = new PipeConfig(url, ListClassId.class);
-        pipeConfig.setGsonBuilder(builder);
+        pipeConfig.setRequestBuilder(new GsonRequestBuilder(builder.create()));
         pipeConfig.setPageConfig(pageConfig);
 
         Pipe<ListClassId> dataPipe = pipeline.pipe(ListClassId.class, pipeConfig);
@@ -434,7 +433,7 @@ public class RestAdapterTest {
         GsonBuilder builder = new GsonBuilder().registerTypeAdapter(Point.class, new RestAdapterTest.PointTypeAdapter());
 
         PipeConfig pipeConfig = new PipeConfig(url, ListClassId.class);
-        pipeConfig.setGsonBuilder(builder);
+        pipeConfig.setRequestBuilder(new GsonRequestBuilder(builder.create()));
         pipeConfig.setPageConfig(pageConfig);
 
         Pipe<ListClassId> dataPipe = pipeline.pipe(ListClassId.class, pipeConfig);
