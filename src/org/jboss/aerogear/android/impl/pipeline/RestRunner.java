@@ -433,4 +433,8 @@ public class RestRunner<T> implements PipeHandler<T> {
     protected RequestBuilder<T> getRequestBuilder() {
         return requestBuilder;
     }
+
+    protected ResponseParser<T> getResponseParser() {
+        return responseParser;
+    }
 }
