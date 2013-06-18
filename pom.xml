@@ -73,7 +73,6 @@
                     <version>3.5.1</version>
                     <configuration>
                         <sdk>
-                            <path>/home/summers/Programs/android-sdk-linux</path>
                         </sdk>
                         <undeployBeforeDeploy>true</undeployBeforeDeploy>
                     </configuration>
@@ -126,7 +125,6 @@
                         <debug>${debug}</debug>
                     </run>
                     <sdk>
-                        <path>/home/summers/Programs/android-sdk-linux</path>
                     </sdk>
                     <emulator>
                         <avd>${android.avd}</avd>
