@@ -99,7 +99,7 @@ class AGSecurityAuthenticationModuleRunner {
 
     private String buildLoginData(String username, String password) {
         JsonObject response = new JsonObject();
-        response.addProperty("username", username);
+        response.addProperty("loginName", username);
         response.addProperty("password", password);
         return response.toString();
     }
