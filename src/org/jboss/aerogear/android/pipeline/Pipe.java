@@ -109,6 +109,6 @@ public interface Pipe<T> {
      * 
      * @return the current ResponseParser instance
      */
-    ResponseParser<T> getResponsParser();
+    ResponseParser<T> getResponseParser();
 
 }

@@ -91,7 +91,7 @@ public class StubPipeFactory implements PipeFactory {
             }
 
             @Override
-            public ResponseParser getResponsParser() {
+            public ResponseParser getResponseParser() {
                 return null;
             }
 
